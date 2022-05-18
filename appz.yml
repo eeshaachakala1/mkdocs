@@ -1,21 +1,28 @@
 app:
-  name: mkdocs
-  code: MKDOCS
-  notify: eachakala@ecloudcontrol.com
-
+    name: mkdocs
+    code: MKDOCS
+    notify: eachakala@ecloudcontrol.com
+    
 build:
-  version: 1.0
-  env: DEV
-  build_file: none
-  output_files: output/*.zip
-  image_template: mkdocs-1.0
+    version: 1.0
+    env: DEV
+    build_file: none
+    output_files: output/*.zip
+    image_template: mkdocs-1.0
   
 deploy:
-  context: eeshaachakala1/DEV
-  type: statefulset
-  replicas: 1
-  port:
-  - 8000
-  
+    context: eeshaachakala1/DEV
+    type: statefulset
+    replicas: 1
+    port:
+    - 8000
+    
+volumes:
+  - claim: mkdocs-data
+    mount: /appz/server
+    name: data
+    size: 5Gi
+    mode: ReadWriteOnce   
+    class: microk8s-hostpath
 properties:
-  revision : 39
+    revision : 76
